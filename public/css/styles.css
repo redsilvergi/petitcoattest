@@ -1,0 +1,128 @@
+/* #fffdf1 */
+/* #eee3cb */
+body {
+  background-color: #eee3cb;
+}
+
+.body-container {
+  max-width: 1600px;
+  display: flex; /**/
+  flex-direction: column; /**/
+}
+
+.nav-link {
+  color: gray;
+  font-size: large;
+  /* font-weight: bold; */
+}
+
+.nav-link:focus,
+.nav-link:hover {
+  color: black;
+}
+
+.header-border {
+  border-bottom: 1px dashed black !important;
+}
+
+.footer-border {
+  border-top: 1px dashed black !important;
+}
+
+.nav-toggle {
+  display: none; /* Hide the toggle icon by default */
+}
+
+.dropdown-menu {
+  display: none; /* Hide the dropdown menu by default */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.dropdown-menu.open {
+  display: block; /* Show the dropdown menu when open class is added */
+  opacity: 1;
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-menu ul li {
+  padding: 0;
+}
+
+@media (max-width: 788px) {
+  .justify-content-md-between {
+    justify-content: center !important;
+  }
+
+  .nav-toggle {
+    display: block;
+    cursor: pointer;
+    padding: 5px;
+    margin-right: auto;
+  }
+
+  .logo-div {
+    margin-right: auto;
+  }
+
+  .nav-toggle i {
+    font-size: 30px;
+  }
+
+  .top-nav {
+    display: none; /* Hide the navigation links by default */
+  }
+
+  .dropdown-menu {
+    position: static;
+    background-color: transparent;
+    transition: none;
+    opacity: 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 1px dashed black;
+    padding: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .nav-link {
+    padding: 0.1rem 0.5rem;
+  }
+}
+
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-image-div {
+  height: 100%;
+  width: 30rem;
+}
+.home-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.footer-item {
+  color: gray;
+  text-decoration: none;
+}
+
+.footer-item:focus,
+.footer-item:hover {
+  color: black;
+  text-decoration: none;
+}
