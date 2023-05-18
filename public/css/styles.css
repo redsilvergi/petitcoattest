@@ -2,6 +2,11 @@
 /* #eee3cb */
 body {
   background-color: #eee3cb;
+  color: gray;
+}
+
+.box {
+  margin: 0 15px;
 }
 
 .body-container {
@@ -37,34 +42,31 @@ body {
   border-bottom: 1px dashed black !important;
 }
 
-.nav-toggle {
-  display: none; /* Hide the toggle icon by default */
+.mob-dd,
+.shop-dd,
+.about-dd {
+  display: none;
 }
 
-.dropdown-menu {
-  display: none; /* Hide the dropdown menu by default */
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  background-color: #fff;
-  transition: opacity 0.3s ease;
-  z-index: 1;
-}
-
-.dropdown-menu.open {
-  display: block; /* Show the dropdown menu when open class is added */
+.mob-dd.open,
+.shop-dd.open,
+.about-dd.open {
+  display: block;
   opacity: 1;
+  border-bottom: 1px dashed black;
+  background-color: #fffdf1;
 }
 
-.dropdown-menu ul {
+.mob-dd ul,
+.shop-dd ul,
+.about-dd ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.dropdown-menu ul li {
-  padding: 0;
+.nav-toggle {
+  display: none; /* Hide the toggle icon by default */
 }
 
 @media (max-width: 788px) {
@@ -107,6 +109,11 @@ body {
     padding: 0.1rem 0.5rem;
   }
 }
+.shop-nav:hover,
+.about-nav:hover {
+  cursor: pointer;
+  color: black !important;
+}
 
 .home-container {
   display: flex;
@@ -138,11 +145,6 @@ body {
   border-color: red !important;
 }
 
-.footer-row {
-  padding: 0 15px;
-  flex: 1; /* Allow the row to grow and fill the remaining vertical space */
-}
-
 .footer-logo {
   padding: 0;
 }
@@ -153,10 +155,46 @@ body {
   flex-direction: row-reverse;
 }
 
-.footer-bd-bottom {
-  border-bottom: solid 1px black;
+.footer-bd-top {
+  border-top: dashed 1px black;
 }
 
-.footer-bd-right {
-  border-right: solid 1px black;
+.footer-bd-bottom {
+  border-bottom: dashed 1px black;
+}
+
+.footer-bd-left {
+  border-left: dashed 1px black;
+}
+
+.row {
+  margin: 0;
+}
+
+.hongKu {
+  color: gray;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* .hongKu:focus, */
+.hongKu:hover {
+  color: black;
+  text-decoration: none;
+}
+
+/* .hong {
+  color: #ff81ff;
+}
+
+.ku {
+  color: #00dafe;
+} */
+
+.fs-smaller {
+  font-size: smaller;
+}
+
+.ft-w-9 {
+  font-weight: 900 !important;
 }
