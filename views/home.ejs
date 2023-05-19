@@ -1,15 +1,35 @@
 <%- include('partials/header') %>
-<div class="home-container d-flex flex-column">
-  <div class="home-image-div">
-    <img
-      src="../public/pics/login.jpg"
-      alt="petitcoat logo"
-      class="home-image"
-    />
+<div class="home-container">
+  <div class="home-grid-container">
+    <div class="home-image-div">
+      <img src="../public/pics/phonecase1.jpg" alt="case1" class="home-image" />
+    </div>
+    <div class="home-image-div">
+      <img src="../public/pics/case2.jpg" alt="case2" class="home-image" />
+    </div>
+    <div class="home-image-div">
+      <img src="../public/pics/case3.jpg" alt="case3" class="home-image" />
+    </div>
+    <div class="home-image-div">
+      <img src="../public/pics/phonecase1.jpg" alt="case1" class="home-image" />
+    </div>
+    <div class="home-image-div">
+      <img src="../public/pics/case2.jpg" alt="case2" class="home-image" />
+    </div>
+    <div class="home-image-div">
+      <img src="../public/pics/case3.jpg" alt="case3" class="home-image" />
+    </div>
+    <div class="home-image-div">
+      <img src="../public/pics/phonecase1.jpg" alt="case1" class="home-image" />
+    </div>
+    <div class="home-image-div">
+      <img src="../public/pics/pbag.jpg" alt="case1" class="home-image" />
+    </div>
+    <div class="home-image-div">
+      <img src="../public/pics/case2.jpg" alt="case2" class="home-image" />
+    </div>
   </div>
-
-  <% if (user) { %>
-  <div class="mt-5">USER EMAIL: <%= user.username %></div>
-  <% } %>
 </div>
-<%- include('partials/footer') %>
+<% if (user) { %>
+<div class="mt-5 home-container">USER EMAIL: <%= user.username %></div>
+<% } %> <%- include('partials/footer') %>

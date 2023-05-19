@@ -9,8 +9,12 @@
     </div>
 
     <ul class="top-nav nav justify-content-center">
-      <li class="nav-li"><a class="nav-link px-4 shop-nav">SHOP</a></li>
-      <li class="nav-li"><a class="nav-link px-4 about-nav">ABOUT</a></li>
+      <li class="nav-li">
+        <a class="nav-link px-4 shop-nav" style="text-align: center">SHOP</a>
+      </li>
+      <li class="nav-li">
+        <a class="nav-link px-4 about-nav" style="text-align: center">ABOUT</a>
+      </li>
     </ul>
 
     <div class="my-4 d-flex align-items-center justify-content-center logo-div">
@@ -27,13 +31,28 @@
     <ul class="top-nav nav justify-content-center">
       <li class="nav-li">
         <% if (user) { %>
-        <a href="/logout" class="nav-link px-4 login-nav">LOGOUT</a>
+        <a
+          href="/logout"
+          class="nav-link px-4 login-nav"
+          style="text-align: center"
+          >LOGOUT</a
+        >
         <% } else { %>
-        <a href="/login" class="nav-link px-4 login-nav">LOGIN</a>
+        <a
+          href="/login"
+          class="nav-link px-4 login-nav"
+          style="text-align: center"
+          >LOGIN</a
+        >
         <% }%>
       </li>
       <li class="nav-li">
-        <a href="/cart" class="nav-link px-4 cart-nav">CART(0)</a>
+        <a
+          href="/cart"
+          class="nav-link px-4 cart-nav"
+          style="text-align: center"
+          >CART(0)</a
+        >
       </li>
     </ul>
   </div>

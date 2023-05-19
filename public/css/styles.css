@@ -6,7 +6,7 @@ body {
 }
 
 .box {
-  margin: 0 15px;
+  margin: 0 5rem;
 }
 
 .body-container {
@@ -28,7 +28,6 @@ body {
 .nav-link {
   color: gray;
   font-size: large;
-  text-align: center;
   /* font-weight: bold; */
 }
 
@@ -44,18 +43,20 @@ body {
 .mob-dd,
 .shop-dd,
 .about-dd {
-  display: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 1s ease, opacity 1s ease;
+  opacity: 0;
+  border-bottom: 1px dashed black;
+  background-color: #fffdf1;
 }
 
 .mob-dd.open,
 .shop-dd.open,
 .about-dd.open {
-  display: block;
+  max-height: 600px; /* Adjust this value based on the expected height of the dropdown content */
   opacity: 1;
-  border-bottom: 1px dashed black;
-  background-color: #fffdf1;
 }
-
 .mob-dd ul,
 .shop-dd ul,
 .about-dd ul {
@@ -68,7 +69,7 @@ body {
   display: none; /* Hide the toggle icon by default */
 }
 
-@media (max-width: 788px) {
+@media (max-width: 957px) {
   .justify-content-md-between {
     justify-content: center !important;
   }
@@ -117,16 +118,15 @@ body {
 .home-container {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .home-image-div {
   height: 100%;
-  width: 30rem;
 }
+
 .home-image {
-  max-width: 100%;
-  height: auto;
+  width: 20rem;
+  height: 20rem;
 }
 
 .footer-item {
@@ -261,4 +261,20 @@ body {
   background-color: #eee3cb;
   height: 50px;
   cursor: pointer;
+}
+
+.home-grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #eee3cb;
+  padding: 0;
+  gap: 45px;
+}
+
+.newarrival_grid_container {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  background-color: #eee3cb;
+  padding: 0;
+  gap: 1px;
 }

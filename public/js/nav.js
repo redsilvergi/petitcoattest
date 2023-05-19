@@ -15,7 +15,9 @@ const aboutNavList = ["BRAND STORY", "LOOKBOOK", "SHOWROOM", "CUSTOMER CARE"];
 const updateHtml = (navList) => {
   return navList
     .map((item) => {
-      return `<li><a href="/${item.toLowerCase()}" class="nav-link">${item}</a></li>`;
+      return `<li><a href="/${item
+        .toLowerCase()
+        .replace(" ", "")}" class="nav-link">${item}</a></li>`;
     })
     .join("");
 };

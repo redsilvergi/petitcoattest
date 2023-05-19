@@ -137,8 +137,15 @@ app.get("/logout", async (req, res) => {
   }
 });
 
-app.route("/shop").get((req, res) => res.render("shop"));
-app.route("/about").get((req, res) => res.render("about"));
+app.route("/newarrival").get((req, res) => res.render("newarrival"));
+app.route("/all").get((req, res) => res.render("ready"));
+app.route("/phonecase").get((req, res) => res.render("ready"));
+app.route("/griptok").get((req, res) => res.render("ready"));
+app.route("/select").get((req, res) => res.render("ready"));
+app.route("/brandstory").get((req, res) => res.render("ready"));
+app.route("/lookbook").get((req, res) => res.render("ready"));
+app.route("/showroom").get((req, res) => res.render("ready"));
+app.route("/customercare").get((req, res) => res.render("ready"));
 app.route("/cart").get((req, res) => res.render("cart"));
 
 app.listen(process.env.PORT || 3000, () => {
