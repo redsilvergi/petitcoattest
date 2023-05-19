@@ -1,5 +1,37 @@
 <%- include('partials/header') %>
-<div>
-  <h1>login page</h1>
+<div class="d-flex justify-content-center">
+  <div class="login-container">
+    <h3>LOGIN</h3>
+
+    <form action="/login" method="POST" class="d-flex flex-column format">
+      <div class="d-flex flex-column my-4">
+        <label for="email">EMAIL</label>
+        <input type="email" class="loginput" placeholder="" name="username" />
+      </div>
+
+      <div class="d-flex flex-column my-4">
+        <label for="password">PASSWORD</label>
+        <input type="password" class="loginput" name="password" />
+      </div>
+
+      <% if (error && error.length > 0) { %>
+      <div class="alert alert-danger"><%= error %></div>
+      <% } %>
+
+      <div class="d-flex align-items-center my-4">
+        <input id="userid_check" type="checkbox" />
+        <div id="v_cb"></div>
+        <label for="userid_check" id="remember_label">REMEMBER ID</label>
+      </div>
+
+      <button type="submit" class="my-4 logbtn">LOGIN</button>
+    </form>
+
+    <div class="my-4 d-flex justify-content-around">
+      <a class="atag" href="/login" role="button">FIND ID</a>
+      <a class="atag" href="/login" role="button">FIND PW</a>
+      <a class="atag" href="/joinus" role="button">JOIN US</a>
+    </div>
+  </div>
 </div>
 <%- include('partials/footer') %>

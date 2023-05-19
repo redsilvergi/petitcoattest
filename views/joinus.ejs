@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+<div class="d-flex justify-content-center">
+  <div class="login-container">
+    <h3>JOIN US</h3>
+
+    <form action="/joinus" method="POST" class="d-flex flex-column format">
+      <div class="d-flex flex-column my-4">
+        <label for="email">EMAIL *</label>
+        <input type="email" class="loginput" placeholder="" name="username" />
+      </div>
+
+      <div class="d-flex flex-column my-4">
+        <label for="password">PASSWORD *</label>
+        <input type="password" class="loginput" name="password" />
+      </div>
+
+      <div class="d-flex flex-column my-4">
+        <label for="text">NAME *</label>
+        <input type="text" class="loginput" placeholder="" name="name" />
+      </div>
+
+      <div class="d-flex flex-column my-4">
+        <label for="number">MOBILE NO. *</label>
+        <input type="number" class="loginput" placeholder="" name="mob_no" />
+      </div>
+
+      <div class="d-flex flex-column my-4">
+        <label for="string">ADDRESS</label>
+        <input type="string" class="loginput" placeholder="" name="address" />
+      </div>
+
+      <div class="d-flex align-items-center my-4">
+        <input id="userid_check" type="checkbox" />
+        <div id="v_cb"></div>
+        <label for="userid_check" id="remember_label">모두 동의</label>
+      </div>
+
+      <button type="submit" class="my-4">JOIN</button>
+    </form>
+  </div>
+</div>
+<%- include('partials/footer') %>

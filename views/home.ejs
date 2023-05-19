@@ -1,11 +1,15 @@
 <%- include('partials/header') %>
-<div class="home-container">
+<div class="home-container d-flex flex-column">
   <div class="home-image-div">
     <img
-      src="../public/pics/IMG_9830.JPG"
+      src="../public/pics/login.jpg"
       alt="petitcoat logo"
       class="home-image"
     />
   </div>
+
+  <% if (user) { %>
+  <div class="mt-5">USER EMAIL: <%= user.username %></div>
+  <% } %>
 </div>
 <%- include('partials/footer') %>
