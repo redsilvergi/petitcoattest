@@ -1,4 +1,4 @@
-<%- include('partials/header') %>
+<%- include('../partials/header') %>
 <div class="d-flex justify-content-center">
   <div class="login-container">
     <h3>JOIN US</h3>
@@ -35,8 +35,12 @@
         <label for="userid_check" id="remember_label">모두 동의</label>
       </div>
 
+      <% if (error && error.length > 0) { %>
+      <div class="alert alert-danger"><%= error %></div>
+      <% } %>
+
       <button type="submit" class="my-4">JOIN</button>
     </form>
   </div>
 </div>
-<%- include('partials/footer') %>
+<%- include('../partials/footer') %>
