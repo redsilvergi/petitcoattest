@@ -11,6 +11,7 @@ const path = require("path");
 const routeFiles = fs.readdirSync(path.join(__dirname, "routes"));
 const flash = require("connect-flash");
 const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
+const Product = require("./models/product");
 
 const app = express();
 
@@ -72,32 +73,64 @@ routeFiles.forEach((file) => {
   }
 });
 
-app.route("/cart").get((req, res) => res.render("cart"));
-
-app.post("/cart", async (req, res) => {
-  const file = req.files.image;
-  const folderName = "testpics3"; // Specify the desired folder name
-  const uploadTime = new Date().getTime();
-
-  const uploadParams = {
-    Bucket: "petitcoatbucket",
-    Key: `${folderName}/${uploadTime}${file.name}`,
-    Body: file.data,
-    ContentType: file.mimetype,
-    ACL: "public-read",
-  };
-
-  try {
-    const data = await s3Client.send(new PutObjectCommand(uploadParams));
-    const imageURL = `https://${uploadParams.Bucket}.s3.amazonaws.com/${uploadParams.Key}`;
-    console.log("Upload Success", data, imageURL);
-  } catch (err) {
-    console.log("Error", err);
-    res.status(500).send("Upload failed");
-  }
-
-  res.redirect("/"); // Redirect to the home page or any other page after successful upload
+app.get("/success", (req, res) => {
+  res.render("success");
 });
+
+app
+  .route("/cart")
+  .get((req, res) => res.render("cart"))
+  .post(async (req, res) => {
+    let files = req.files.images;
+    const { folderName, productName, productDescription, price } = req.body;
+
+    if (!files) {
+      res.status(400).send("No files uploaded");
+      return;
+    }
+
+    // Convert a single file upload to an array
+    if (!Array.isArray(files)) {
+      files = [files];
+    }
+
+    if (!folderName || !productName || !productDescription || !price) {
+      res.status(400).send("All fields are required");
+      return;
+    }
+
+    const uploadTime = new Date().getTime();
+
+    try {
+      files.map(async (file) => {
+        const uploadParams = {
+          Bucket: "petitcoatbucket",
+          Key: `${folderName}/${uploadTime}${file.name}`,
+          Body: file.data,
+          ContentType: file.mimetype,
+          ACL: "public-read",
+        };
+
+        const data = await s3Client.send(new PutObjectCommand(uploadParams));
+        const imageURL = `https://${uploadParams.Bucket}.s3.amazonaws.com/${uploadParams.Key}`;
+        console.log("Upload Success", imageURL);
+
+        const product = new Product({
+          imageURL,
+          productName,
+          productDescription,
+          price,
+        });
+        await product.save();
+      });
+    } catch (err) {
+      console.log("Error", err);
+      res.status(500).send("Upload failed");
+      return;
+    }
+
+    res.redirect("/success"); // Redirect to the home page or any other page after successful upload
+  });
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("server started");

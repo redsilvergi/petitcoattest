@@ -3,7 +3,15 @@
 <div class="body-container">
   <h1>Upload Image</h1>
   <form method="POST" action="/cart" enctype="multipart/form-data">
-    <input type="file" name="image" />
+    <input type="file" name="images" multiple />
+    <input type="text" name="folderName" placeholder="Folder Name" />
+    <input type="text" name="productName" placeholder="Product Name" />
+    <input
+      type="text"
+      name="productDescription"
+      placeholder="Product Description"
+    />
+    <input type="number" name="price" placeholder="Price" />
     <button type="submit">Upload</button>
   </form>
 </div>
