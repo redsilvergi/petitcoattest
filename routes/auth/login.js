@@ -8,8 +8,8 @@ router.use(flash());
 router
   .route("/")
   .get((req, res) => {
-    const errorMessage = req.flash("error");
-    res.render("authpages/login", { error: errorMessage }); // Pass the flash message to the view
+    // const errorMessage = req.flash("error");
+    res.render("authpages/login"); // Pass the flash message to the view
   })
   .post(
     passport.authenticate("local", {
@@ -17,10 +17,6 @@ router
       failureFlash: true,
     }),
     (req, res) => {
-      if (!req.user) {
-        req.flash("error", "Invalid email or password");
-        // return res.redirect("/authpages/login");
-      }
       res.redirect("/");
     }
   );

@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const fileUpload = require("express-fileupload");
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -9,12 +10,28 @@ const fs = require("fs");
 const path = require("path");
 const routeFiles = fs.readdirSync(path.join(__dirname, "routes"));
 const flash = require("connect-flash");
+const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
 
 const app = express();
 
 app.use(express.static(`${__dirname}`));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// image upload to aws storage setup
+const s3Client = new S3Client({
+  region: "ap-northeast-2",
+  credentials: {
+    accessKeyId: process.env.AWS_KEY,
+    secretAccessKey: process.env.AWS_SECRET,
+  },
+});
+
+app.use(
+  fileUpload({
+    limits: { fileSize: 50 * 1024 * 1024 },
+  })
+);
 
 //passport setup 1 -session
 app.use(
@@ -55,7 +72,32 @@ routeFiles.forEach((file) => {
   }
 });
 
-// app.route("/cart").get((req, res) => res.render("cart"));
+app.route("/cart").get((req, res) => res.render("cart"));
+
+app.post("/cart", async (req, res) => {
+  const file = req.files.image;
+  const folderName = "testpics3"; // Specify the desired folder name
+  const uploadTime = new Date().getTime();
+
+  const uploadParams = {
+    Bucket: "petitcoatbucket",
+    Key: `${folderName}/${uploadTime}${file.name}`,
+    Body: file.data,
+    ContentType: file.mimetype,
+    ACL: "public-read",
+  };
+
+  try {
+    const data = await s3Client.send(new PutObjectCommand(uploadParams));
+    const imageURL = `https://${uploadParams.Bucket}.s3.amazonaws.com/${uploadParams.Key}`;
+    console.log("Upload Success", data, imageURL);
+  } catch (err) {
+    console.log("Error", err);
+    res.status(500).send("Upload failed");
+  }
+
+  res.redirect("/"); // Redirect to the home page or any other page after successful upload
+});
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("server started");

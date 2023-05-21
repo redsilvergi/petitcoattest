@@ -1,5 +1,11 @@
 <%- include('partials/header') %>
+
 <div class="body-container">
-  <h1>cart page</h1>
+  <h1>Upload Image</h1>
+  <form method="POST" action="/cart" enctype="multipart/form-data">
+    <input type="file" name="image" />
+    <button type="submit">Upload</button>
+  </form>
 </div>
+
 <%- include('partials/footer') %>
