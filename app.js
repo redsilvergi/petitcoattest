@@ -14,6 +14,7 @@ const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
 const Product = require("./models/product");
 
 const app = express();
+const json = express.json();
 
 app.use(express.static(`${__dirname}`));
 app.set("view engine", "ejs");
@@ -27,6 +28,8 @@ const s3Client = new S3Client({
     secretAccessKey: process.env.AWS_SECRET,
   },
 });
+
+app.use(json);
 
 app.use(
   fileUpload({
@@ -57,7 +60,14 @@ app.use((req, res, next) => {
   next();
 });
 
-mongoose.connect("mongodb://127.0.0.1:27017/petitcoatUserDB");
+// mongoose.connect("mongodb://127.0.0.1:27017/petitcoatUserDB");
+
+const connection = mongoose.connect(
+  `mongodb+srv://admin-silver:${process.env.DB_PASSWORD}@cluster0.am2adgk.mongodb.net/petitcoattestDB`
+);
+if (connection) {
+  console.log("connected to petitcoattestDB");
+}
 
 //app.use modular routes
 routeFiles.forEach((file) => {
@@ -131,6 +141,16 @@ app
 
     res.redirect("/success"); // Redirect to the home page or any other page after successful upload
   });
+
+// app.get("/products", async (req, res) => {
+//   try {
+//     const products = await Product.find();
+//     res.json(products);
+//   } catch (err) {
+//     console.log("Error", err);
+//     res.status(500).send("Failed to fetch products");
+//   }
+// });
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("server started");

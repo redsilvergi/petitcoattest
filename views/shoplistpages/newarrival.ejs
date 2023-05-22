@@ -2,45 +2,34 @@
 <div class="body-container d-flex flex-column align-items-center mt-3">
   <h3 class="mb-4">NEW ARRIVAL</h3>
   <div class="newarrival_grid_container" style="width: 100%">
-    <div>
+    <% products.forEach(function(product) { %>
+    <div class="arvl_prdct">
       <div class="m-3" style="position: relative">
-        <div class="prdImg">
+        <div class="arvl_img">
           <img
-            src="//en.minitmute.com/web/product/medium/202302/00488b9a8b6b4a1185f7b0e826d032fa.jpg"
-            alt="lime_bag"
-            style="max-width: 100%"
+            src="<%= product.imageURL %>"
+            alt="<%= product.productName %>"
+            style="width: 294px; height: 294px"
           />
-          <span
-            class="wish"
-            style="
-              position: absolute;
-              z-index: 1;
-              right: 13px;
-              cursor: pointer;
-              font-size: xx-large;
-            "
-            >♡</span
-          >
+          <span class="wish">♡</span>
         </div>
       </div>
-      <div class="description d-flex flex-column align-items-center">
+      <div class="arvl_dscrp d-flex flex-column align-items-center">
         <a
           href="/product_detail"
-          style="font-size: 15px; color: #252525"
           class="d-flex flex-column align-items-center mt-2"
         >
-          <div>clo waist</div>
-          <div>butter<small>(5/23 Delivery)</small></div>
+          <div style="font-weight: bold; margin-bottom: 1rem">
+            <%= product.productName %>
+          </div>
+          <div><%= product.productDescription %></div>
+          <div><small>(5/23 Delivery)</small></div>
         </a>
-        <div
-          class="my-2"
-          style="font-size: 25px; color: #252525; font-weight: bold"
-        >
-          $154.00
-        </div>
+        <div class="my-2 arvl_prc"><%= product.price %> 원</div>
         <div class="soldout mb-2">SOLD OUT</div>
       </div>
     </div>
+    <% }); %>
   </div>
 </div>
 <%- include('../partials/footer') %>
