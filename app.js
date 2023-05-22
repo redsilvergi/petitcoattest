@@ -15,6 +15,7 @@ const Product = require("./models/product");
 
 const app = express();
 const json = express.json();
+const DB_PASSWORD = process.env.DB_PASSWORD;
 
 app.use(express.static(`${__dirname}`));
 app.set("view engine", "ejs");
@@ -63,7 +64,7 @@ app.use((req, res, next) => {
 // mongoose.connect("mongodb://127.0.0.1:27017/petitcoatUserDB");
 
 const connection = mongoose.connect(
-  `mongodb+srv://admin-silver:${process.env.DB_PASSWORD}@cluster0.am2adgk.mongodb.net/petitcoattestDB`
+  `mongodb+srv://admin-silver:${DB_PASSWORD}@cluster0.am2adgk.mongodb.net/petitcoattestDB`
 );
 if (connection) {
   console.log("connected to petitcoattestDB");
