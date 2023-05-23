@@ -5,6 +5,10 @@ body {
   color: gray;
 }
 
+label {
+  margin: 0;
+}
+
 .box {
   margin: 0 5rem;
 }
@@ -109,6 +113,7 @@ body {
     padding: 0.1rem 0.5rem;
   }
 }
+
 .shop-nav:hover,
 .about-nav:hover {
   cursor: pointer;

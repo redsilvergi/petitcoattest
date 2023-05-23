@@ -1,0 +1,38 @@
+<%- include('../partials/header') %>
+
+<div class="body-container">
+  <h1>Upload Image</h1>
+  <form
+    method="POST"
+    action="/adminhk2165"
+    enctype="multipart/form-data"
+    class="d-flex flex-column"
+    style="width: 300px; row-gap: 10px"
+  >
+    <label for="section">Select a Section:</label>
+    <select id="section" name="section">
+      <option value="newarrival">new arrival</option>
+      <option value="phonecase">phone case</option>
+      <option value="griptok">griptok</option>
+      <option value="select">select</option>
+    </select>
+
+    <input type="file" name="images" multiple />
+    <input type="text" name="folderName" placeholder="Folder Name" />
+    <input type="text" name="productName" placeholder="Product Name" />
+    <input
+      type="text"
+      name="productDescription"
+      placeholder="Product Description"
+      maxlength="35"
+    />
+    <input type="number" name="price" placeholder="Price" />
+    <button type="submit">Upload</button>
+  </form>
+
+  <% if (sucM && sucM.length > 0) { %>
+  <div style="background-color: #dff0d8"><%= sucM[0] %></div>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>

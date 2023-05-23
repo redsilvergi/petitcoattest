@@ -4,8 +4,10 @@ const Product = require("../../models/product");
 
 router.route("/").get(async (req, res) => {
   try {
-    const products = await Product.find().sort({ createdAt: -1 }); //.limit(10);
-    console.log(products);
+    const products = await Product.find({ section: "newarrival" }).sort({
+      createdAt: -1,
+    }); //.limit(10);
+    // console.log(products);
 
     res.render("shoplistpages/newarrival", { products });
   } catch (e) {

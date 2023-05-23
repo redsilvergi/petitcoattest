@@ -1,0 +1,35 @@
+<%- include('../partials/header') %>
+<div class="body-container d-flex flex-column align-items-center mt-3">
+  <h3 class="mb-4">SELECT</h3>
+  <div class="newarrival_grid_container" style="width: 100%">
+    <% products.forEach(function(product) { %>
+    <div class="arvl_prdct">
+      <div class="m-3" style="position: relative">
+        <div class="arvl_img">
+          <img
+            src="<%= product.imageURL %>"
+            alt="<%= product.productName %>"
+            style="width: 294px; height: 294px"
+          />
+          <span class="wish">♡</span>
+        </div>
+      </div>
+      <div class="arvl_dscrp d-flex flex-column align-items-center">
+        <a
+          href="/product_detail"
+          class="d-flex flex-column align-items-center mt-2"
+        >
+          <div style="font-weight: bold; margin-bottom: 1rem">
+            <%= product.productName %>
+          </div>
+          <div><%= product.productDescription %></div>
+          <div><small>(5/23 Delivery)</small></div>
+        </a>
+        <div class="my-2 arvl_prc"><%= product.price %> 원</div>
+        <div class="soldout mb-2">SOLD OUT</div>
+      </div>
+    </div>
+    <% }); %>
+  </div>
+</div>
+<%- include('../partials/footer') %>

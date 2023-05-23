@@ -14,7 +14,7 @@ router
   .post(
     passport.authenticate("local", {
       failureRedirect: "/login",
-      failureFlash: true,
+      failureFlash: true, // put string to change error message
     }),
     (req, res) => {
       res.redirect("/");

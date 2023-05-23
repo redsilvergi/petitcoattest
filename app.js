@@ -10,8 +10,6 @@ const fs = require("fs");
 const path = require("path");
 const routeFiles = fs.readdirSync(path.join(__dirname, "routes"));
 const flash = require("connect-flash");
-const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
-const Product = require("./models/product");
 
 const app = express();
 const json = express.json();
@@ -21,16 +19,7 @@ app.use(express.static(`${__dirname}`));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// image upload to aws storage setup
-const s3Client = new S3Client({
-  region: "ap-northeast-2",
-  credentials: {
-    accessKeyId: process.env.AWS_KEY,
-    secretAccessKey: process.env.AWS_SECRET,
-  },
-});
-
-app.use(json);
+// app.use(json);
 
 app.use(
   fileUpload({
@@ -88,70 +77,9 @@ app.get("/success", (req, res) => {
   res.render("success");
 });
 
-app
-  .route("/cart")
-  .get((req, res) => res.render("cart"))
-  .post(async (req, res) => {
-    let files = req.files.images;
-    const { folderName, productName, productDescription, price } = req.body;
-
-    if (!files) {
-      res.status(400).send("No files uploaded");
-      return;
-    }
-
-    // Convert a single file upload to an array
-    if (!Array.isArray(files)) {
-      files = [files];
-    }
-
-    if (!folderName || !productName || !productDescription || !price) {
-      res.status(400).send("All fields are required");
-      return;
-    }
-
-    const uploadTime = new Date().getTime();
-
-    try {
-      files.map(async (file) => {
-        const uploadParams = {
-          Bucket: "petitcoatbucket",
-          Key: `${folderName}/${uploadTime}${file.name}`,
-          Body: file.data,
-          ContentType: file.mimetype,
-          ACL: "public-read",
-        };
-
-        const data = await s3Client.send(new PutObjectCommand(uploadParams));
-        const imageURL = `https://${uploadParams.Bucket}.s3.amazonaws.com/${uploadParams.Key}`;
-        console.log("Upload Success", imageURL);
-
-        const product = new Product({
-          imageURL,
-          productName,
-          productDescription,
-          price,
-        });
-        await product.save();
-      });
-    } catch (err) {
-      console.log("Error", err);
-      res.status(500).send("Upload failed");
-      return;
-    }
-
-    res.redirect("/success"); // Redirect to the home page or any other page after successful upload
-  });
-
-// app.get("/products", async (req, res) => {
-//   try {
-//     const products = await Product.find();
-//     res.json(products);
-//   } catch (err) {
-//     console.log("Error", err);
-//     res.status(500).send("Failed to fetch products");
-//   }
-// });
+app.get("/cart", (req, res) => {
+  res.render("cart");
+});
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("server started");
